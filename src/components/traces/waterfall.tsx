@@ -48,7 +48,8 @@ const SpanBar = ({ span, totalMs, animate }: SpanBarProps) => {
   const left = (span.start / totalMs) * 100;
   const width = Math.max((span.duration / totalMs) * 100, 0.6);
   const end = left + width;
-  const labelInside = width > 14;
+  // Inside the bar only when "1.50 s" fits even in the narrow timeline next to the span inspector.
+  const labelInside = width > 20;
   const labelBefore = !labelInside && end > 86;
   const kind = SPAN_KINDS[span.kind];
 
@@ -70,7 +71,7 @@ const SpanBar = ({ span, totalMs, animate }: SpanBarProps) => {
         {labelInside ? (
           <span
             className={cn(
-              "px-1.5 text-[11px] leading-none font-medium text-white tabular-nums",
+              "px-1.5 text-[11px] leading-none font-medium whitespace-nowrap text-white tabular-nums",
               width < 35 && "hidden sm:inline",
             )}
           >
